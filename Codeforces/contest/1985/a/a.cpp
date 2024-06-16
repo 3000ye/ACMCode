@@ -4,16 +4,10 @@ using namespace std;
 #define ld long double
 
 void solve() {
-    int n; cin >> n;
+    string x, y; cin >> x >> y;
 
-    int sum = 0, res = 0, x;
-    while (n -- ) {
-        cin >> x; sum += x;
-
-        if ((sum / 2) == x) res ++;
-    }
-
-    cout << res << endl;
+    swap(x[0], y[0]);
+    cout << x << " " << y << endl;
 }
 
 int main() {

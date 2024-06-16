@@ -6,11 +6,12 @@ using namespace std;
 void solve() {
     int n; cin >> n;
 
-    int sum = 0, res = 0, x;
+    ll sum = 0, res = 0, x, m = -1;
     while (n -- ) {
         cin >> x; sum += x;
 
-        if ((sum / 2) == x) res ++;
+        m = max(m, x);
+        if (sum == m + m) res ++;
     }
 
     cout << res << endl;
