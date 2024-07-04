@@ -28,51 +28,29 @@ struct ListNode {
  */
 class Solution {
 public:
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        auto res = new ListNode(0, head);
+    ListNode* reverseKGroup(ListNode* node, int k) {
+        int cnt = 0;
+        for (auto cur = node; cur; cur = cur->next) { cnt ++; }
 
-        auto cur = res->next;
-        while (cur != nullptr) {
-            int cnt = 0;
-            auto temp = cur;
-            while (cnt < k && temp != nullptr) {
-                cout << temp->val << " ";
-                temp = temp->next;
-                cnt++;
-            }
-            cout << endl;
+        auto head = new ListNode(0, node);
+        auto p = head;
+        ListNode *pre = nullptr; auto cur = head->next;
 
-            if (cnt == k) {
-                auto next = temp->next;
-                temp->next = nullptr;
-                auto new_temp = reverseList(temp);
-                auto temp_temp = new_temp;
-                while (temp_temp->next != nullptr) temp_temp = temp_temp->next;
+        for (; cnt >= k; cnt -= k) {
+            for (int i = 0; i < k; i ++) {
+                auto next = cur->next;
+                cur->next = pre;
+                pre = cur;
+                cur = next;
+            }
 
-                temp_temp->next = next;
-                cur->next = new_temp;
-                cur = temp_temp;
-            }
-            else {
-                break;
-            }
+            auto next = p->next;
+            p->next->next = cur;
+            p->next = pre;
+            p = next;
         }
 
-        return res->next;
-    }
-
-    ListNode* reverseList(ListNode* head) {
-        if (head == nullptr) return nullptr;
-
-        ListNode *res = new ListNode(head->val);
-        while (head->next != nullptr) {
-            auto tmp = head->next;
-            head->next = tmp->next;
-            tmp->next = res;
-            res = tmp;
-        }
-
-        return res;
+        return head->next;
     }
 };
 // @lc code=end
