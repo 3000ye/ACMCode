@@ -1,0 +1,17 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Push Pages
+
+on:
+    # Runs on pushes targeting the default branch
+    push:
+        branches: ["main"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            # Give the default GITHUB_TOKEN write permission to commit and push the
+            # added or changed files to the repository.
+            contents: write
+        steps:
+            - uses: actions/checkout@v3
