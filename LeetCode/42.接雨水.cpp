@@ -7,22 +7,27 @@ using namespace std;
  * [42] 接雨水
  */
 
+// @castor solve=start
+// 
+// @castor solve=end
+
 // @lc code=start
 class Solution {
 public:
     int trap(vector<int>& height) {
-        stack<int> stk; int low = 0;
+        stack<int> stk; int cnt = 0;
 
-        int cnt = 0;
-        for (auto h : height) {
-            if (stk.empty()) stk.push(h);
-            else if (stk.top() < h) {
-                int temp = 0, new_cnt = 0;
-                
+        for (int i = 0, l = height.size(); i < l; i ++) {
+            while (!stk.empty() and height[stk.top()] < height[i]) {
+                int idx = stk.top(); stk.pop();
+                if (stk.empty()) break;
+
+                int l = stk.top(), r = i;
+                int h = min(height[r], height[l]) - height[idx];
+                cnt += (r - l - 1) * h;
             }
-            else if (stk.top() > h) {
-                low = h; stk.push(h);
-            }
+
+            stk.push(i);
         }
 
         return cnt;
