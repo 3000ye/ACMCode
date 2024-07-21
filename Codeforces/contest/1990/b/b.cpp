@@ -11,17 +11,16 @@ void coutls(vector<int> ls) {
 
 void solve() {
     int n, x, y; cin >> n >> x >> y;
+    vector<int> ls(n + 10);
 
-    if (x < y) {
-        vector<int> ls(n, -1);
-        ls[x - 1] = 1; ls[y - 1] = 1;
-        coutls(ls); return;
-    }
-    else {
-        vector<int> ls(n, -1);
-        for (int i = y - 1; i <= x - 1; i ++) ls[i] = 1;
-        coutls(ls); return;
-    }
+    for (int i = y; i <= x; i ++) ls[i] = 1;
+    int flag = -1;
+    for (int i = y - 1; i >= 1; i --) { ls[i] = flag; flag = -flag; }
+    flag = -1;
+    for (int i = x + 1; i <= n; i ++) { ls[i] = flag; flag = -flag; }
+
+    for (int i = 1; i <= n; i ++) cout << ls[i] << " ";
+    cout << endl;
 }
 
 int main() {
