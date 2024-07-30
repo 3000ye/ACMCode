@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <utility>
 #include <vector>
 using namespace std;
 
@@ -12,15 +11,19 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
-
-    int countRangeSum(vector<int>& nums, int lower, int upper) {
-
-        return
-    }
-
-    void dfs(int l, int r, vector<int>& ls, int lower, int upper) {
-        if ()
+    int countRangeSum(vector<int> &nums, int lower, int upper) {
+        int n = nums.size();
+        long long sum = 0;
+        multiset<long long> set;
+        set.insert(0);
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            res += distance(set.lower_bound(sum - upper),
+                            set.upper_bound(sum - lower));
+            set.insert(sum);
+        }
+        return res;
     }
 };
 // @lc code=end
-

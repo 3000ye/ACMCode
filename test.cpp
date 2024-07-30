@@ -4,10 +4,13 @@ using namespace std;
 #define ld long double
 
 void solve() {
-    string s = "123456";
-    auto temp = s.substr(2, 0);
+    long long ls[4] = {2147483647,-2147483648,-1,0};
 
-    cout << temp << endl;
+    long long sum = 0;
+    for (auto i : ls) {
+        sum += i;
+        cout << sum <<endl;
+    }
 }
 
 int main() {
