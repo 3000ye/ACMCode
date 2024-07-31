@@ -1,1 +1,9 @@
-<div class="test-example-line test-example-line-even test-example-line-0">4</div><div class="test-example-line test-example-line-odd test-example-line-1">6</div><div class="test-example-line test-example-line-odd test-example-line-1">_(_)_)</div><div class="test-example-line test-example-line-even test-example-line-2">2</div><div class="test-example-line test-example-line-even test-example-line-2">_)</div><div class="test-example-line test-example-line-odd test-example-line-3">8</div><div class="test-example-line test-example-line-odd test-example-line-3">_)_)_)_)</div><div class="test-example-line test-example-line-even test-example-line-4">8</div><div class="test-example-line test-example-line-even test-example-line-4">_(_)_(_)</div>
+4
+6
+_(_)_)
+2
+_)
+8
+_)_)_)_)
+8
+_(_)_(_)
