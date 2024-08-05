@@ -31,8 +31,20 @@ struct TreeNode {
  */
 class Solution {
 public:
-    int maxPathSum(TreeNode* root) {
+    int func(TreeNode* root, int &val) {
+        if (!root) return 0;
+        int l = func(root->left, val);
+        int r = func(root->right, val);
+        int temp = root->val + max(0, l) + max(0, r);
+        int res = root->val + max(0, max(l, r));
+        val = max(val, max(temp, res));
+        return res;
+    }
 
+    int maxPathSum(TreeNode* root) {
+        int val = INT_MIN;
+        func(root, val);
+        return val;
     }
 };
 // @lc code=end
