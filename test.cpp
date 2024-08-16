@@ -1,15 +1,15 @@
 #include "bits/stdc++.h"
-#include <vector>
 using namespace std;
 #define ll long long
 #define ld long double
 
 void solve() {
-    set<int> ls = {1, 3};
-    set<int> temp = {3, 1};
+    map<string, int> dic;
+    dic["ccc"] = 2; dic["aaa"] = 3; dic["bbb"] = 4;
 
-    auto flag = ls == temp;
-    cout << flag << endl;
+    for (auto [k, v] : dic) {
+        cout << k << endl;
+    }
 }
 
 int main() {
