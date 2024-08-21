@@ -32,20 +32,3 @@ public:
 };
 // @lc code=end
 
-int main() {
-    int m, n; cin >> m >> n;
-    vector<vector<int>> dic;
-    for (int k = 0; k < m; k ++) {
-        vector<int> ls;
-        for (int i = 0; i < n; i ++) {
-            char x; cin >> x; ls.push_back(x - '0');
-            // cout << x << endl;
-        }
-        dic.push_back(ls);
-    }
-
-    auto res = Solution().uniquePathsWithObstacles(dic);
-    cout << res << endl;
-
-    return 0;
-}
