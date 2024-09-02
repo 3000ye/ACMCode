@@ -1,51 +1,49 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
+#define ll long long
+#define ld long double
 
-/*
- * @lc app=leetcode.cn id=63 lang=cpp
- *
- * [63] 不同路径 II
- */
 
-// @castor solve=start
-// 动态规划：扩大数组规模降低代码量
-// f(x, y) = f(x - 1, y) + f(x, y - 1), G(i, j) != 1
-// @castor solve=end
+const int N = 110;
+int dic[N][N], f[N][N];
 
-// @lc code=start
-class Solution {
-public:
-    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
-        vector<vector<int>> dic(m + 1, vector<int> (n + 1, 0));
+void solve() {
+    int n, m; string x, y;
+    cin >> n >> m;
 
-        dic[1][1] = 1;
-        for (int i = 1; i <= m; i ++) {
-            for (int j = 1; j <= n; j ++) {
-                if (i > 1 and obstacleGrid[i - 2][j - 1] == 0) dic[i][j] += dic[i - 1][j];
-                if (j > 1 and obstacleGrid[i - 1][j - 2] == 0) dic[i][j] += dic[i][j - 1];
+    map<string, int> path;
+    for (int i = 1; i <= n; i ++) {
+        cin >> x; path[x] = i;
+    }
+
+    for (int i = 1; i <= m; i ++) {
+        cin >> x >> y;
+        dic[path[x]][path[y]] = dic[path[y]][path[x]] = 1;
+    }
+
+    memset(f, -0x3f, sizeof(f));
+    f[1][1] = 1;
+    for (int i = 1; i <= n; i ++) {
+        for (int j = i + 1; j <= n; j ++) {
+            for (int k = 1; k < j; k ++) {
+                if (dic[j][k]) {
+                    f[j][i] = f[i][j] = max(f[i][j], f[i][k] + 1);
+                }
             }
         }
-
-        return obstacleGrid[m - 1][n - 1] == 1 ? 0 : dic[m][n];
     }
-};
-// @lc code=end
+
+    int res = 1;
+    for (int i = 1; i <= n; i ++) {
+        if (dic[i][n]) res = max(res, f[i][n]);
+    }
+
+    cout << res << endl;
+}
 
 int main() {
-    int m, n; cin >> m >> n;
-    vector<vector<int>> dic;
-    for (int k = 0; k < m; k ++) {
-        vector<int> ls;
-        for (int i = 0; i < n; i ++) {
-            char x; cin >> x; ls.push_back(x - '0');
-            // cout << x << endl;
-        }
-        dic.push_back(ls);
-    }
-
-    auto res = Solution().uniquePathsWithObstacles(dic);
-    cout << res << endl;
-
+    cin.tie(0); cout.tie(0);
+    ios::sync_with_stdio(false);
+    solve();
     return 0;
 }
