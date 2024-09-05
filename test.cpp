@@ -1,49 +1,23 @@
-#include "bits/stdc++.h"
-using namespace std;
-#define ll long long
-#define ld long double
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        vector<vector<int>> dp(word1.size() + 1, vector<int>(word2.size() + 1, 0));
 
+        for (int i = 0; i < dp.size(); i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j < dp[0].size(); j++) {
+            dp[0][j] = j;
+        }
 
-const int N = 110;
-int dic[N][N], f[N][N];
-
-void solve() {
-    int n, m; string x, y;
-    cin >> n >> m;
-
-    map<string, int> path;
-    for (int i = 1; i <= n; i ++) {
-        cin >> x; path[x] = i;
-    }
-
-    for (int i = 1; i <= m; i ++) {
-        cin >> x >> y;
-        dic[path[x]][path[y]] = dic[path[y]][path[x]] = 1;
-    }
-
-    memset(f, -0x3f, sizeof(f));
-    f[1][1] = 1;
-    for (int i = 1; i <= n; i ++) {
-        for (int j = i + 1; j <= n; j ++) {
-            for (int k = 1; k < j; k ++) {
-                if (dic[j][k]) {
-                    f[j][i] = f[i][j] = max(f[i][j], f[i][k] + 1);
+        for (int i = 1; i < dp.size(); i++) {
+            for (int j = 1; j < dp[i].size(); j++) {
+                dp[i][j] = min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i][j - 1])) + 1;
+                if (word1[i - 1] == word2[j - 1]) {
+                    dp[i][j] = min(dp[i][j], dp[i - 1][j - 1]);
                 }
             }
         }
+        return dp.back().back();
     }
-
-    int res = 1;
-    for (int i = 1; i <= n; i ++) {
-        if (dic[i][n]) res = max(res, f[i][n]);
-    }
-
-    cout << res << endl;
-}
-
-int main() {
-    cin.tie(0); cout.tie(0);
-    ios::sync_with_stdio(false);
-    solve();
-    return 0;
-}
+};
