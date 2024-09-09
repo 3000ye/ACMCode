@@ -38,20 +38,3 @@ public:
 };
 // @lc code=end
 
-int main() {
-    string p; cin >> p;
-    int n; cin >> n;
-    vector<string> ls;
-    for (int i = 0; i < n; i ++) {
-        string s; cin >> s; ls.push_back(s);
-    }
-
-    auto res = Solution().camelMatch(ls, p);
-
-    cout << (res[0] ? "true" : "false") << endl;
-    for (int i = 1; i < res.size(); i ++) {
-        cout << " " << (res[i] ? "true" : "false") << endl;
-    }
-
-    return 0;
-}
