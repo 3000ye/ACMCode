@@ -8,7 +8,6 @@
 
 // @lcpr-template-start
 #include "bits/stdc++.h"
-#include <algorithm>
 using namespace std;
 #define ll long long
 #define ld long double
@@ -17,22 +16,36 @@ using namespace std;
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int l = 0, r = 0, n = s.size();
-        string res = "";
+        int res = 1, idx = 0, n = s.size();
+        bool dp[1010][1010] = {false};
 
-        while (l < n and r < n) {
-            string temp = s.substr(l, r + 1);
-            
-            r ++;
+        // for (int i = 0; i < n; i ++) {
+        //     // cout << "-----------" << endl;
+        //     for (int j = i; j < n; j ++) {
+        //         if (j - i >= 2) dp[i][j] = dp[i + 1][j - 1] and s[i] == s[j];
+        //         else dp[i][j] = s[i] == s[j];
+
+        //         // cout << i << " " << j << endl;
+
+        //         if (dp[i][j] and j - i + 1 > res) {
+        //             cout << i << " " << j << endl;
+        //             res = j - i + 1; idx = i;
+        //         }
+        //     }
+        // }
+
+        for (int j = 0; j < n; j ++) {
+            for (int i = j; i >= 0; i --) {
+                if (j - i >= 2) dp[i][j] = dp[i + 1][j - 1] and s[i] == s[j];
+                else dp[i][j] = s[i] == s[j];
+
+                if (dp[i][j] and j - i + 1 > res) {
+                    res = j - i + 1; idx = i;
+                }
+            }
         }
 
-        return res;
-    }
-
-    bool isPalindrome(string s) {
-        string temp = s;
-        reverse(s.begin(), s.end());
-        return temp == s;
+        return s.substr(idx, res);
     }
 };
 // @lc code=end
